@@ -61,9 +61,10 @@ def shortest_path(M, start, goal):
             f = g + h
 
             # add this node and its relevant parameters to the frontier
+            # note that path.copy() creates the desired behavior of copying a new, independent list to the tuple
+            # writing just "path" has the surprising Python-specific result of creating a pointer to the single, mutable "path" object
             frontier.append((neighbor, path.copy(), g, f))
 
         # again, this can be replaced with a minimum binary heap for faster implementation, for now simply find
         # the minimum f to continue with the "best estimated total path cost first"
         frontier.sort(key = lambda x: x[-1], reverse = True)
-            
